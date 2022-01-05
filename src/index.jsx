@@ -6,7 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Intro from './pages/Intro';
 import List from './pages/List';
-import Results from './pages/Results';
+import Evaluation from './pages/Evaluation';
 import Quiz from './pages/Quiz';
 import Chart from './pages/Chart';
 
@@ -19,6 +19,8 @@ import {
 const App = () =>{
  
   const [data,setData] = useState([]);
+  //const [qdata,setQdata] = useState([]);
+  
   
   useEffect(() => {
     fetch(
@@ -27,9 +29,10 @@ const App = () =>{
         .then((response) => response.json())
         .then((data) => {
           setData(data)
-          console.log(data);
+          /*console.log(data);*/
         });
 },[] );
+
 
   return (
   
@@ -37,12 +40,16 @@ const App = () =>{
 
 <BrowserRouter>
 <Header/>
-<Routes> 
-  <Route path="/" element = {<Intro/> }/>
-  <Route path="/list" element = {<List data={data} /> }/>
-  <Route path="/chart" element = {<Chart/> }/>
-</Routes>
+<main className="main">
+  <Routes> 
+    <Route path="/" element = {<Intro/> }/>
+    <Route path="/list" element = {<List data={data} /> }/>
+    <Route path="/list/:id" element={ <Quiz /> } />
+    <Route path="/chart" element = {<Chart/> }/>
+  </Routes>
+</main>
 </BrowserRouter>
+
 
 
 {/*<Results/>
